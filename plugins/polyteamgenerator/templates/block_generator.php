@@ -9,7 +9,7 @@
 </style>
 
 <div style="width:100%; display:flex; justify-content:center; margin-bottom:15px">
-    <button class="btn btn-primary" onclick="toggleView()"> Toggle View </button>
+    <button class="btn btn-primary" onclick="toggleView()"> <?php echo get_string("toggleview", "block_polyteamgenerator"); ?> </button>
 </div>
 
 <div style="min-width:100%" id="polyteam_block_generator">
@@ -17,7 +17,7 @@
         <div id="fitem_id_block_polyteamgenerator_team_size" class="form-group row fitem">
             <div class="col-md-5">
                 <span class="float-sm-right text-nowrap"> </span>
-                <label class="col-form-label d-inline " for="id_block_polyteamgenerator_team_size"> Team Size </label>
+                <label class="col-form-label d-inline " for="id_block_polyteamgenerator_team_size"> <?php echo get_string("teamsize", "block_polyteamgenerator"); ?> </label>
             </div>
             <div class="col-md-7">
                 <div class="row">
@@ -41,7 +41,7 @@
                     </a>
                 </span>
                 <label class="col-form-label d-inline " for="id_block_polyteamgenerator_team_size_preference">
-                    Team Size Preference
+                    <?php echo get_string("teamsizepreference", "block_polyteamgenerator"); ?>
                 </label>
             </div>
             <div class="col-md-7 form-inline felement" data-fieldtype="select">
@@ -57,7 +57,7 @@
         <div id="fitem_id_block_polyteamgenerator_grouping_name" class="form-group row fitem">
             <div class="col-md-5">
                 <span class="float-sm-right text-nowrap"> </span>
-                <label class="col-form-label d-inline " for="id_block_polyteamgenerator_grouping_name"> Grouping name </label>
+                <label class="col-form-label d-inline " for="id_block_polyteamgenerator_grouping_name"> <?php echo get_string("groupingname", "block_polyteamgenerator"); ?> </label>
             </div>
             <div class="col-md-7 form-inline felement" data-fieldtype="text">
                 <input type="text" class="form-control" id="id_block_polyteamgenerator_grouping_name">
@@ -68,7 +68,7 @@
         <div id="fitem_id_block_polyteamgenerator_prefix" class="form-group row fitem">
             <div class="col-md-5">
                 <span class="float-sm-right text-nowrap"> </span>
-                <label class="col-form-label d-inline " for="id_block_polyteamgenerator_prefix"> Prefix </label>
+                <label class="col-form-label d-inline " for="id_block_polyteamgenerator_prefix"> <?php echo get_string("prefix", "block_polyteamgenerator"); ?> </label>
             </div>
             <div class="col-md-7 form-inline felement" data-fieldtype="text">
                 <input type="text" class="form-control" id="id_block_polyteamgenerator_prefix" value="gr_">
@@ -85,13 +85,13 @@
                     </a>
                 </span>
                 <label class="col-form-label d-inline " for="id_block_polyteamgenerator_algorithms">
-                    Algorithms
+                    <?php echo get_string("algorithms", "block_polyteamgenerator"); ?>
                 </label>
             </div>
             <div class="col-md-7 form-inline felement" data-fieldtype="select">
                 <select class="custom-select" name="block_polyteamgenerator_algorithms" id="id_block_polyteamgenerator_algorithms">
-                    <option value="RANDOM" selected>Random</option>
-                    <option value="MBTI">MBTI</option>
+                    <option value="RANDOM" selected><?php echo get_string("algorithms:random", "block_polyteamgenerator"); ?></option>
+                    <option value="MBTI"><?php echo get_string("algorithms:mbti", "block_polyteamgenerator"); ?></option>
                 </select>
                 <div class="form-control-feedback invalid-feedback" id="id_error_block_polyteamgenerator_algorithms">
                 </div>
@@ -106,7 +106,7 @@
                     </a>
                 </span>
                 <label class="col-form-label d-inline " for="id_block_polyteamgenerator_sections">
-                    Sections
+                    <?php echo get_string("sections", "block_polyteamgenerator"); ?>
                 </label>
             </div>
             <div class="col-md-7 form-inline felement" data-fieldtype="select">
@@ -122,7 +122,7 @@
             </div>
         </div>
 
-        <button class="btn btn-primary" onclick="send()"><i id="id_icon_block_polyteamgenerator_loading_generate" style="display:none" class="fa fa-circle-o-notch fa-spin"></i> Generate </button>
+        <button class="btn btn-primary" onclick="send()"><i id="id_icon_block_polyteamgenerator_loading_generate" style="display:none" class="fa fa-circle-o-notch fa-spin"></i> <?php echo get_string("generate", "block_polyteamgenerator"); ?> </button>
     </form>
 </div>
 

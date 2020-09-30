@@ -8,9 +8,9 @@ class Question {
     public $v2;
     
     function __construct($q, $a1, $a2, $v1, $v2) {
-      $this->q = $q;
-      $this->a1 = $a1;
-      $this->a2 = $a2;
+      $this->q = get_string($q, 'block_polyteamgenerator');
+      $this->a1 = get_string($a1, 'block_polyteamgenerator');
+      $this->a2 = get_string($a2, 'block_polyteamgenerator');
       $this->v1 = $v1;
       $this->v2 = $v2;
     }
@@ -21,7 +21,7 @@ class Section {
     public $questions;
     
     function __construct($t, $q) {
-        $this->title = $t;
+        $this->title = get_string($t, 'block_polyteamgenerator');
         $this->questions = $q;
     }
 }
@@ -67,7 +67,5 @@ class Questionnaire {
         $s4 = new Section("Decision Making Process", $s4q);
 
         $this->sections = array($s1, $s2, $s3, $s4);
-
-        return $this->sections;
     }
 }

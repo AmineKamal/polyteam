@@ -13,7 +13,8 @@ class profile_field_polyteamprofile extends profile_field_base {
 			if ($field->hidden) continue;
 			$stringify = $field->stringify;
 			$value = isset($data->{$field->name}) ? $stringify($data->{$field->name}) : "";
-			$html .= "<h6>" . ucfirst($field->name) . " : " . $value . "</h6><br/>";
+			$name = get_string($field->name, 'profilefield_polyteamprofile');
+			$html .= "<h6>" . $name . " : " . $value . "</h6><br/>";
 		}
 
 		return $html;
