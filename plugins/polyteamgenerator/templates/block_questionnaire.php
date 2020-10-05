@@ -40,7 +40,7 @@
         ?>
         
 
-        <button class="btn btn-primary" onclick="sendQuestions()"><i id="id_icon_block_polyteamgenerator_loading_send" style="display:none" class="fa fa-circle-o-notch fa-spin"></i> Send </button>
+        <button class="btn btn-primary" onclick="sendQuestions()"><i id="id_icon_block_polyteamgenerator_loading_send" style="display:none" class="fa fa-circle-o-notch fa-spin"></i> <?php echo get_string("send", "block_polyteamgenerator"); ?> </button>
     </form>
 </div>
 

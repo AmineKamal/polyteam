@@ -12,6 +12,12 @@ class Student {
       $this->firstname = $moodle_student->firstname;
       $this->lastname = $moodle_student->lastname;
       $this->email = $moodle_student->email;
-      $this->profile_field_polyteam = $moodle_student->profile_field_polyteam;
+
+      if (isset($moodle_student->profile_field_polyteam)) {
+        $this->profile_field_polyteam = $moodle_student->profile_field_polyteam;
+      } else {
+        $this->profile_field_polyteam = "{}";
+      }
+      
     }
 }
