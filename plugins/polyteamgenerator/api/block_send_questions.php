@@ -26,10 +26,13 @@ if (curl_errno($ch)) {
 
 curl_close($ch);
 
-$profile = json_decode($USER->profile_field_polyteam);
-$profile->personality = json_decode($result);
-$USER->profile_field_polyteam = json_encode($profile);
-profile_save_data($USER);
-
-if (isset($error_msg)) echo $error_msg;
-else echo $result;
+if (isset($error_msg)) {
+    echo $error_msg;
+    http_response_code(500);
+} else {
+    $profile = json_decode($USER->profile_field_polyteam);
+    $profile->personality = json_decode($result);
+    $USER->profile_field_polyteam = json_encode($profile);
+    profile_save_data($USER);
+    echo $result;
+}
