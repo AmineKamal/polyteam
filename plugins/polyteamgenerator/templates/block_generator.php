@@ -16,7 +16,11 @@
     <form action="javascript:void(0);">
         <div id="fitem_id_block_polyteamgenerator_team_size" class="form-group row fitem">
             <div class="col-md-5">
-                <span class="float-sm-right text-nowrap"> </span>
+                <span class="float-sm-right text-nowrap">
+                    <a class="btn btn-link p-0" role="button" data-container="body" data-toggle="popover" data-placement="right" data-content="<div class=&quot;no-overflow&quot;><p><?php echo get_string("teamsize:help:content", "block_polyteamgenerator"); ?></p></div> " data-html="true" tabindex="0" data-trigger="focus">
+                        <i class="icon fa fa-question-circle text-info fa-fw " title="<?php echo get_string("teamsize:help:label", "block_polyteamgenerator"); ?>" aria-label="<?php echo get_string("teamsize:help:label", "block_polyteamgenerator"); ?>"></i>
+                    </a>
+                </span>
                 <label class="col-form-label d-inline " for="id_block_polyteamgenerator_team_size"> <?php echo get_string("teamsize", "block_polyteamgenerator"); ?> </label>
             </div>
             <div class="col-md-7">
@@ -36,8 +40,8 @@
         <div id="fitem_id_block_polyteamgenerator_team_size_preference" class="form-group row fitem">
             <div class="col-md-5">
                 <span class="float-sm-right text-nowrap">
-                    <a class="btn btn-link p-0" role="button" data-container="body" data-toggle="popover" data-placement="right" data-content="<div class=&quot;no-overflow&quot;><p>Privileged users (such as teachers and managers) will always be able to see your email address.</p></div> " data-html="true" tabindex="0" data-trigger="focus">
-                        <i class="icon fa fa-question-circle text-info fa-fw " title="Help with Team Size Preference" aria-label="Help with Team Size Preference"></i>
+                    <a class="btn btn-link p-0" role="button" data-container="body" data-toggle="popover" data-placement="right" data-content="<div class=&quot;no-overflow&quot;><p><?php echo get_string("teamsizepreference:help:content", "block_polyteamgenerator"); ?></p></div> " data-html="true" tabindex="0" data-trigger="focus">
+                        <i class="icon fa fa-question-circle text-info fa-fw " title="<?php echo get_string("teamsizepreference:help:label", "block_polyteamgenerator"); ?>" aria-label="<?php echo get_string("teamsizepreference:help:label", "block_polyteamgenerator"); ?>"></i>
                     </a>
                 </span>
                 <label class="col-form-label d-inline " for="id_block_polyteamgenerator_team_size_preference">
@@ -56,7 +60,11 @@
 
         <div id="fitem_id_block_polyteamgenerator_grouping_name" class="form-group row fitem">
             <div class="col-md-5">
-                <span class="float-sm-right text-nowrap"> </span>
+                <span class="float-sm-right text-nowrap">
+                    <a class="btn btn-link p-0" role="button" data-container="body" data-toggle="popover" data-placement="right" data-content="<div class=&quot;no-overflow&quot;><p><?php echo get_string("groupingname:help:content", "block_polyteamgenerator"); ?></p></div> " data-html="true" tabindex="0" data-trigger="focus">
+                        <i class="icon fa fa-question-circle text-info fa-fw " title="<?php echo get_string("groupingname:help:label", "block_polyteamgenerator"); ?>" aria-label="<?php echo get_string("groupingname:help:label", "block_polyteamgenerator"); ?>"></i>
+                    </a>
+                </span>
                 <label class="col-form-label d-inline " for="id_block_polyteamgenerator_grouping_name"> <?php echo get_string("groupingname", "block_polyteamgenerator"); ?> </label>
             </div>
             <div class="col-md-7 form-inline felement" data-fieldtype="text">
@@ -67,7 +75,11 @@
 
         <div id="fitem_id_block_polyteamgenerator_prefix" class="form-group row fitem">
             <div class="col-md-5">
-                <span class="float-sm-right text-nowrap"> </span>
+                <span class="float-sm-right text-nowrap">
+                    <a class="btn btn-link p-0" role="button" data-container="body" data-toggle="popover" data-placement="right" data-content="<div class=&quot;no-overflow&quot;><p><?php echo get_string("prefix:help:content", "block_polyteamgenerator"); ?></p></div> " data-html="true" tabindex="0" data-trigger="focus">
+                        <i class="icon fa fa-question-circle text-info fa-fw " title="<?php echo get_string("prefix:help:label", "block_polyteamgenerator"); ?>" aria-label="<?php echo get_string("prefix:help:label", "block_polyteamgenerator"); ?>"></i>
+                    </a>
+                </span>
                 <label class="col-form-label d-inline " for="id_block_polyteamgenerator_prefix"> <?php echo get_string("prefix", "block_polyteamgenerator"); ?> </label>
             </div>
             <div class="col-md-7 form-inline felement" data-fieldtype="text">
@@ -80,8 +92,8 @@
         <div id="fitem_id_block_polyteamgenerator_algorithms" class="form-group row fitem">
             <div class="col-md-5">
                 <span class="float-sm-right text-nowrap">
-                    <a class="btn btn-link p-0" role="button" data-container="body" data-toggle="popover" data-placement="right" data-content="<div class=&quot;no-overflow&quot;><p>Privileged users (such as teachers and managers) will always be able to see your email address.</p></div> " data-html="true" tabindex="0" data-trigger="focus">
-                        <i class="icon fa fa-question-circle text-info fa-fw " title="Help with Algorithms" aria-label="Help with Algorithms"></i>
+                    <a class="btn btn-link p-0" role="button" data-container="body" data-toggle="popover" data-placement="right" data-content="<div class=&quot;no-overflow&quot;><p><?php echo get_string("algorithms:help:content", "block_polyteamgenerator"); ?></p></div> " data-html="true" tabindex="0" data-trigger="focus">
+                        <i class="icon fa fa-question-circle text-info fa-fw " title="<?php echo get_string("algorithms:help:label", "block_polyteamgenerator"); ?>" aria-label="<?php echo get_string("algorithms:help:label", "block_polyteamgenerator"); ?>"></i>
                     </a>
                 </span>
                 <label class="col-form-label d-inline " for="id_block_polyteamgenerator_algorithms">
@@ -101,8 +113,8 @@
         <div id="fitem_id_block_polyteamgenerator_sections" class="form-group row fitem">
             <div class="col-md-5">
                 <span class="float-sm-right text-nowrap">
-                    <a class="btn btn-link p-0" role="button" data-container="body" data-toggle="popover" data-placement="right" data-content="<div class=&quot;no-overflow&quot;><p>Privileged users (such as teachers and managers) will always be able to see your email address.</p></div> " data-html="true" tabindex="0" data-trigger="focus">
-                        <i class="icon fa fa-question-circle text-info fa-fw " title="Help with Sections" aria-label="Help with Sections"></i>
+                    <a class="btn btn-link p-0" role="button" data-container="body" data-toggle="popover" data-placement="right" data-content="<div class=&quot;no-overflow&quot;><p><?php echo get_string("sections:help:content", "block_polyteamgenerator"); ?></p></div> " data-html="true" tabindex="0" data-trigger="focus">
+                        <i class="icon fa fa-question-circle text-info fa-fw " title="<?php echo get_string("sections:help:label", "block_polyteamgenerator"); ?>" aria-label="<?php echo get_string("sections:help:label", "block_polyteamgenerator"); ?>"></i>
                     </a>
                 </span>
                 <label class="col-form-label d-inline " for="id_block_polyteamgenerator_sections">

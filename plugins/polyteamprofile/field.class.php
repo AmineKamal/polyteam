@@ -14,7 +14,8 @@ class profile_field_polyteamprofile extends profile_field_base {
 			$stringify = $field->stringify;
 			$value = isset($data->{$field->name}) ? $stringify($data->{$field->name}) : "";
 			$name = get_string($field->name, 'profilefield_polyteamprofile');
-			$html .= "<h6>" . $name . " : " . $value . "</h6><br/>";
+			$help = $this->get_help_section($field->name);
+			$html .= $help . "<h6>" . $name . " : " . $value . "</h6><br/>";
 		}
 
 		return $html;
@@ -57,5 +58,17 @@ class profile_field_polyteamprofile extends profile_field_base {
 	private function get_fields() {
 		$profile = new PolyteamProfile();
 		return $profile->fields;
+	}
+
+	private function get_help_section($name) {
+		$content = get_string($name . ":help:content", 'profilefield_polyteamprofile');
+		$label = get_string($name . ":help:label", 'profilefield_polyteamprofile');
+
+		return "
+		<span class='float-sm-right text-nowrap'>
+		<a class='btn btn-link p-0' role='button' data-container='body' data-toggle='popover' data-placement='right' data-content='<div class=&quot;no-overflow&quot;><p>". $content ."</p></div> ' data-html='true' tabindex='0' data-trigger='focus'>
+			<i class='icon fa fa-question-circle text-info fa-fw' title='". $label ."' aria-label='". $label ."'></i>
+		</a>
+		</span>";
 	}
 }

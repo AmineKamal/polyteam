@@ -14,7 +14,7 @@ $string['polyteamgenerator:myaddinstance'] = 'Add a new simple HTML block to the
 // Form
 $string['toggleview'] = 'Toggle View';
 $string['teamsize'] = 'Team Size';
-$string['teamsizepreference'] = 'Team Size';
+$string['teamsizepreference'] = 'Team Size Preference';
 $string['groupingname'] = 'Grouping Name';
 $string['prefix'] = 'Prefix';
 $string['algorithms'] = "Algorithms";
@@ -22,6 +22,20 @@ $string['algorithms:random'] = "Random";
 $string['algorithms:mbti'] = "MBTI";
 $string['sections'] = "Sections";
 $string['generate'] = "Generate";
+
+// Help Sections
+$string["teamsize:help:label"] = "Help with Team Size";
+$string["teamsize:help:content"] = "The Team Size input determines the acceptable range for the size of the team [min, max].";
+$string["teamsizepreference:help:label"] = "Help with Team Size Preference";
+$string["teamsizepreference:help:content"] = "The Team Size Preference input determines wether to use the smallest team size possible or the largest.";
+$string["groupingname:help:label"] = "Help with Grouping Name";
+$string["groupingname:help:content"] = "The Team Grouping Name input refers to the name of the grouping which will contain all the teams created. The grouping won't be created if the field is left blank.";
+$string["prefix:help:label"] = "Help with Team Prefix";
+$string["prefix:help:content"] = "The prefix input will add the prefix to all the team names. The suffix will be generated with the team index starting from 00.";
+$string["algorithms:help:label"] = "Help with Algorithms";
+$string["algorithms:help:content"] = "The Algorithms input determines what algorithm will be used for the team creation.";
+$string["sections:help:label"] = "Help with Sections";
+$string["sections:help:content"] = "The Sections input lists all the available sections to use for the creation of the teams. The teams will be created with the members of all the selected sections.";
 
 // Questionnaire
 
