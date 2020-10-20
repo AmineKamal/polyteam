@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
-import { shuffle, chunk, flatten } from "lodash";
 import { Answers, PersonalityService } from "../services/personality.service";
-import { Student, TeamParams, TeamService } from "../services/team.service";
+import { TeamParams, TeamService } from "../services/team.service";
 
 export default class IndexController {
   public index(req: Request, res: Response, next: Function): void {

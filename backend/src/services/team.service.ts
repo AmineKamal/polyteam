@@ -46,6 +46,7 @@ export interface TeamParams {
   prefix: string;
   algorithm: string;
   groupings: Grouping[];
+  groupnames: string[];
 }
 
 export interface PersonalityStudent extends Student {
@@ -58,29 +59,52 @@ interface Range {
 }
 
 type TeamSizePreference = "min" | "max";
+
 type GroupMod = "reg" | "mar";
+
 type AffinityGroupsPoints = ST.StrictMap<PersonalityType, [number, number][]>;
+
 type AffinityGroups = ST.StrictMap<PersonalityType, [number, GroupMod][]>;
+
 type Multiplicity = {
   i: number;
   reg: PersonalityType[];
   mar: PersonalityType[];
 };
 
+interface Team {
+  students: Student[];
+  score: number;
+}
+
 export class TeamService {
   public static generate(params: TeamParams) {
+    const validatePrefix = this.validatePrefix(params);
     const teams = this.createTeams(params);
+
     if (!teams)
-      return errorResponse("invalid-team-size-range", "team_size", [
+      return errorResponse("invalid-team-size-range", "ERROR", "team_size", null, [
         "max",
         "min",
       ]);
 
-    const usernames = teams.map(t => t.map(s => s.username));
+    const usernames = teams.map(t => t.students.map(s => s.username));
     const { prefix } = params;
     const teamUsernames = usernames.map((u, i) => u.map(e => [e, prefix + i]));
 
-    return validResponse(convertArrayToCSV(flatten(teamUsernames)));
+    const csv: string = convertArrayToCSV(flatten(teamUsernames));
+
+    if (!validatePrefix) return errorResponse("invalid-prefix", "WARNING", "prefix", {csv, teams});
+
+    return validResponse({csv, teams});
+  }
+
+  private static validatePrefix(params: TeamParams) {
+    const { groupnames, prefix } = params;
+
+    if (groupnames.some(g => g.startsWith(prefix))) return false;
+
+    return true;
   }
 
   private static createTeams(params: TeamParams) {
@@ -140,7 +164,8 @@ export class TeamService {
       teams[teams[pos].length < teamFormat[pos] ? pos : ++pos].push(m)
     );
 
-    return teams;
+    const finalTeams: Team[] = teams.map(t => ({ students: t, score: 0 }));
+    return finalTeams;
   }
 
   private static createAffinityGroupsTeams(
@@ -221,7 +246,14 @@ export class TeamService {
       places[pos]--;
     });
 
-    return teams.map(t => t.students.map(s => students[s.i]));
+    const finalTeams: Team[] = teams.map(t => {
+      return {
+        students: t.students.map(s => students[s.i]),
+        score: (t.mods.length / Math.max(t.students.length, 8)) * 100
+      };
+    });
+
+    return finalTeams;
   }
 
   private static getTeams(
@@ -235,7 +267,7 @@ export class TeamService {
     else return this.getMaxTeams(len, size);
   }
 
-  private static getMaxTeams(len: number, size: Range) {
+  private static getMinTeams(len: number, size: Range) {
     const { min, max } = size;
 
     for (let i = min; i <= max; i++) {
@@ -258,7 +290,7 @@ export class TeamService {
     return teams;
   }
 
-  private static getMinTeams(len: number, size: Range) {
+  private static getMaxTeams(len: number, size: Range) {
     const { min, max } = size;
 
     for (let i = max; i >= min; i--) {

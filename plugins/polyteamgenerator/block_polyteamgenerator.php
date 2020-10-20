@@ -43,6 +43,7 @@ class block_polyteamgenerator extends block_base {
         }
 
         $groupings = array_values(groups_get_all_groupings($COURSE->id));
+        $groups = array_values(groups_get_all_groups($COURSE->id));
 
         $get_section_name = function ($grouping) {
             $regex = "/^[A-Z]{3}[0-9]{4}([A-Z]{1})?_[0-9]{2}[LC]$/"; // Default
@@ -71,16 +72,19 @@ class block_polyteamgenerator extends block_base {
             return $grouping_members;
         };
 
+        $get_group_name = function($group) { return $group->name; };
+
         $sections = array_filter(array_map($get_section_name, $groupings));
         $groupings = json_encode(array_map($get_grouping_members, $groupings));
+        $groupnames = json_encode(array_map($get_group_name, $groups));
 
         $this->content = new stdClass;
-        $this->content->text = $this->get_professor_content($groupings, $sections);
+        $this->content->text = $this->get_professor_content($groupings, $sections, $groupnames);
      
         return $this->content;
     }
 
-    private function get_professor_content($groupings, $sections) {
+    private function get_professor_content($groupings, $sections, $groupnames) {
         global $CFG;
 
         $url = "https://polyteam-backend-staging.herokuapp.com/teams"; // Default

@@ -2,7 +2,8 @@
 
 function get_error_codes() {
     $CODES = array(
-        "invalid-team-size-range"
+        "invalid-team-size-range",
+        "invalid-prefix"
     );
 
     $error_codes = new stdClass();
