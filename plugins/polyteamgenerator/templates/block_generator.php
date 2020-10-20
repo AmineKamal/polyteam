@@ -6,6 +6,16 @@
     #polyteam_block_questionnaire {
         display: none;
     }
+
+    .is-warning {
+        border-color: #FFCC00 !important;
+        background-image: url("data:image/svg+xml,%3csvg xmlns=\'http://www.w3.org/2000/svg\' fill=\'%23FFCC00\' viewBox=\'-2 -2 7 7\'%3e%3cpath stroke=\'%23FFCC00\' d=\'M0 0l3 3m0-3L0 3\'/%3e%3ccircle r=\'.5\'/%3e%3ccircle cx=\'3\' r=\'.5\'/%3e%3ccircle cy=\'3\' r=\'.5\'/%3e%3ccircle cx=\'3\' cy=\'3\' r=\'.5\'/%3e%3c/svg%3E") !important;
+    }
+
+    .warning-feedback {
+        color: #FFCC00 !important;
+    }
+
 </style>
 
 <div style="width:100%; display:flex; justify-content:center; margin-bottom:15px">
@@ -150,7 +160,8 @@
     let url = "<?=$url?>";
     let groupings = <?=$groupings?>;
     let gcodes = <?=$codes?>;
-    
+    let groupnames = <?=$groupnames?>;
+
     let activatedErrorFields = [];
 
     function parseForm() {
@@ -171,7 +182,8 @@
             groupingName,
             prefix,
             algorithm,
-            groupings
+            groupings,
+            groupnames
         });
 
         return {
@@ -181,7 +193,8 @@
             groupingName,
             prefix,
             algorithm,
-            groupings
+            groupings,
+            groupnames
         };
     }
 
@@ -195,10 +208,17 @@
 
             if (xhr.status >= 200 && xhr.status < 300) {
                 const response = JSON.parse(xhr.responseText);
-                download(response);
+                download(response.csv, "csv", "groups.csv");
+                download(JSON.stringify(response.teams, null, 4), "json", "groups.json");
             } else {
                 const response = JSON.parse(xhr.responseText);
-                displayError(response.code, response.input, response.suffixes);
+
+                if (response.severity === "WARNING") {
+                    download(response.data.csv, "csv", "groups.csv");
+                    download(JSON.stringify(response.data.teams, null, 4), "json", "groups.json");
+                }
+
+                displayError(response.code, response.severity, response.input, response.suffixes);
             }
         };
 
@@ -221,13 +241,14 @@
         }
     }
 
-    function download(csv, filename="groups.csv") {
-        let encodedUri = encodeURI("data:text/csv;charset=utf-8," + csv);
+    function download(data, type, filename) {
+        let encodedUri = `data:text/${type};charset=utf-8,` + encodeURIComponent(data);
         let link = document.createElement("a");
         link.setAttribute("href", encodedUri);
         link.setAttribute("download", filename);
         document.body.appendChild(link); // Required for FF
         link.click(); // This will download the data file named "groups.csv".
+        link.remove();
     }
 
     function getSelectValues(select) {
@@ -245,7 +266,7 @@
         return result;
     }
 
-    function displayError(errorCode, inputName, suffixes = [""]) {
+    function displayError(errorCode, severity, inputName, suffixes = [""]) {
         suffixes.forEach(s => {
             let inputId, errorInputId;
 
@@ -265,12 +286,14 @@
             const errorInput = document.getElementById(errorInputId);
 
             if (input) {
+                if (severity === "WARNING") input.classList.add("is-warning");
                 input.classList.add("is-invalid");
             }
 
             if (errorInput) {
                 errorInput.style.display = "block";
                 errorInput.innerHTML = "- " + gcodes[errorCode];
+                if (severity === "WARNING") errorInput.classList.add("warning-feedback");
             }
 
             activatedErrorFields.push({inputId, errorInputId});
@@ -282,10 +305,12 @@
             if (inputId) {
                 const input = document.getElementById(inputId);
                 input.classList.remove("is-invalid");
+                input.classList.remove("is-warning");
             }
 
             if (errorInputId) {
                 const errorInput = document.getElementById(errorInputId);
+                errorInput.classList.remove("warning-feedback");
                 errorInput.style.display = "none";
                 errorInput.innerHTML = "";
             }

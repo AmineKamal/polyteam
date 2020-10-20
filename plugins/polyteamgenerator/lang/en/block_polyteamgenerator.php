@@ -103,4 +103,5 @@ $string['Merciful'] = 'Merciful';
 
 // Error Codes
 
-$string['error:code:invalid-team-size-range'] = "The provided range for the team size is not valid with the number of students.";
+$string['error:code:invalid-team-size-range'] = "The provided range for the team size is not valid for the number of students.";
+$string['error:code:invalid-prefix'] = "The provided prefix is already in use by other team names and there might be conflicts.";
