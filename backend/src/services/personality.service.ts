@@ -1,5 +1,6 @@
 import * as ST from "simple-structures";
 import { isString } from "simple-structures";
+import { IResponse, validResponse } from "./types";
 
 type EIAnswer = "e" | "i";
 type JPAnswer = "j" | "p";
@@ -28,7 +29,7 @@ export type PersonalityType = typeof Personalities[number];
 export type Personality = Partial<ST.StrictMap<PersonalityType, number>>;
 
 export class PersonalityService {
-  public static getPersonality(answers: Answers) {
+  public static getPersonality(answers: Answers): IResponse<Personality> {
     console.log(answers);
 
     const personality: Personality = {};
@@ -45,7 +46,7 @@ export class PersonalityService {
     this.setPersonality(EI + JP + 2 * TF, personality, "ET", "IF");
     this.setPersonality(EI + JP - 2 * TF, personality, "EF", "IT");
 
-    return personality;
+    return validResponse(personality);
   }
 
   public static parsePersonality(str: string): Personality {

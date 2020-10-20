@@ -1,8 +1,9 @@
 <?php
 
 require_once($CFG->dirroot.'/user/profile/lib.php');
-require_once("classes/questionnaire.class.php");
-require_once("classes/student.class.php");
+require_once("lib/questionnaire.class.php");
+require_once("lib/student.class.php");
+require_once("lib/lib.php");
 
 class block_polyteamgenerator extends block_base {
 
@@ -87,8 +88,10 @@ class block_polyteamgenerator extends block_base {
             $url = $CFG->block_polyteamgenerator_url;
         }
 
+        // Extra Scope Variables accessible in template
         $questions = $this->get_questions();
         $jsQuestions = json_encode($questions);
+        $codes = json_encode(get_error_codes());
         
         ob_start();
         include('templates/block_generator.php');
@@ -99,8 +102,10 @@ class block_polyteamgenerator extends block_base {
     }
 
     private function get_student_content() {
+        // Extra Scope Variables accessible in template
         $questions = $this->get_questions();
         $jsQuestions = json_encode($questions);
+        $codes = json_encode(get_error_codes());
 
         ob_start();
         include('templates/block_questionnaire.php');

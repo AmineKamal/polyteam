@@ -9,15 +9,24 @@ export default class IndexController {
   }
 
   public getPersonality(req: Request, res: Response) {
-    res.json(PersonalityService.getPersonality(req.body as Answers));
+    const response = PersonalityService.getPersonality(req.body as Answers);
+
+    if (response.status) {
+      res.json(response.data);
+    } else {
+      res.status(400).json(response.data);
+    }
   }
 
   public createTeams(req: Request, res: Response) {
     const params = req.body as TeamParams;
-    const csv = TeamService.generate(params);
+    const response = TeamService.generate(params);
 
-    if (!csv) res.sendStatus(400);
-    else res.json(csv);
+    if (response.status) {
+      res.json(response.data);
+    } else {
+      res.status(400).json(response.data);
+    }
   }
 }
 
