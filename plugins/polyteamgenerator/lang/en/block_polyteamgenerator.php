@@ -22,6 +22,7 @@ $string['algorithms:random'] = "Random";
 $string['algorithms:mbti'] = "MBTI";
 $string['sections'] = "Sections";
 $string['generate'] = "Generate";
+$string['sections:all'] = "All Sections";
 
 // Help Sections
 $string["teamsize:help:label"] = "Help with Team Size";
@@ -99,3 +100,7 @@ $string['Skeptical'] = 'Skeptical';
 $string['Tolerant'] = 'Tolerant';
 $string['Impartial'] = 'Impartial';
 $string['Merciful'] = 'Merciful';
+
+// Error Codes
+
+$string['error:code:invalid-team-size-range'] = "The provided range for the team size is not valid with the number of students.";

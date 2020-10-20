@@ -5,7 +5,9 @@ import {
   PersonalityService,
 } from "./personality.service";
 import * as ST from "simple-structures";
-import { shuffle, flatten, map } from "lodash";
+import { shuffle, flatten } from "lodash";
+import { errorResponse, ErrorService } from "./error.service";
+import { validResponse } from "./types";
 
 // tslint:disable-next-line:no-require-imports
 const { convertArrayToCSV } = require("convert-array-to-csv");
@@ -68,13 +70,17 @@ type Multiplicity = {
 export class TeamService {
   public static generate(params: TeamParams) {
     const teams = this.createTeams(params);
-    if (!teams) return null;
+    if (!teams)
+      return errorResponse("invalid-team-size-range", "team_size", [
+        "max",
+        "min",
+      ]);
 
     const usernames = teams.map(t => t.map(s => s.username));
     const { prefix } = params;
     const teamUsernames = usernames.map((u, i) => u.map(e => [e, prefix + i]));
 
-    return convertArrayToCSV(flatten(teamUsernames));
+    return validResponse(convertArrayToCSV(flatten(teamUsernames)));
   }
 
   private static createTeams(params: TeamParams) {
@@ -88,7 +94,10 @@ export class TeamService {
 
     const members = flatten(
       groupings
-        .filter(({ grouping }) => sections.includes(grouping.name))
+        .filter(
+          ({ grouping }) =>
+            sections.includes(grouping.name) || sections.includes("All")
+        )
         .map(g => g.members)
     );
 

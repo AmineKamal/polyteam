@@ -26,14 +26,13 @@
             <div class="col-md-7">
                 <div class="row">
                     <div class="col-md-6 form-inline felement" data-fieldtype="number">
-                        <input type="number" class="form-control" id="id_block_polyteamgenerator_team_size_min" placeholder="Min">
-                        <div class="form-control-feedback invalid-feedback" id="id_error_team_size_min"></div>
+                        <input type="number" class="form-control" id="id_block_polyteamgenerator_team_size_min" placeholder="Min" style="padding: 0;padding-left: 5px;">
                     </div>
                     <div class="col-md-6 form-inline felement" data-fieldtype="number">
-                        <input type="number" class="form-control" id="id_block_polyteamgenerator_team_size_max" placeholder="Max">
-                        <div class="form-control-feedback invalid-feedback" id="id_error_team_size_max"></div>
+                        <input type="number" class="form-control" id="id_block_polyteamgenerator_team_size_max" placeholder="Max" style="padding: 0;padding-left: 5px;">
                     </div>
-                </div>    
+                </div>
+                <div class="form-control-feedback invalid-feedback" id="id_error_block_polyteamgenerator_team_size">ERROR</div>
             </div>
         </div>
 
@@ -54,6 +53,7 @@
                     <option value="max">Max</option>
                 </select>
                 <div class="form-control-feedback invalid-feedback" id="id_error_block_polyteamgenerator_team_size_preference">
+                ERROR
                 </div>
             </div>
         </div>
@@ -69,7 +69,7 @@
             </div>
             <div class="col-md-7 form-inline felement" data-fieldtype="text">
                 <input type="text" class="form-control" id="id_block_polyteamgenerator_grouping_name">
-                <div class="form-control-feedback invalid-feedback" id="id_error_block_polyteamgenerator_grouping_name"></div>
+                <div class="form-control-feedback invalid-feedback" id="id_error_block_polyteamgenerator_grouping_name">ERROR</div>
             </div>
         </div>
 
@@ -84,7 +84,7 @@
             </div>
             <div class="col-md-7 form-inline felement" data-fieldtype="text">
                 <input type="text" class="form-control" id="id_block_polyteamgenerator_prefix" value="gr_">
-                <div class="form-control-feedback invalid-feedback" id="id_error_block_polyteamgenerator_prefix"></div>
+                <div class="form-control-feedback invalid-feedback" id="id_error_block_polyteamgenerator_prefix">ERROR</div>
             </div>
         </div>
         
@@ -106,6 +106,7 @@
                     <option value="MBTI"><?php echo get_string("algorithms:mbti", "block_polyteamgenerator"); ?></option>
                 </select>
                 <div class="form-control-feedback invalid-feedback" id="id_error_block_polyteamgenerator_algorithms">
+                ERROR
                 </div>
             </div>
         </div>
@@ -123,6 +124,7 @@
             </div>
             <div class="col-md-7 form-inline felement" data-fieldtype="select">
                 <select class="custom-select" name="block_polyteamgenerator_sections" id="id_block_polyteamgenerator_sections" multiple>
+                    <option value="All"><?php echo get_string("sections:all", "block_polyteamgenerator"); ?></option>
                     <?php 
                         foreach($sections as $section) {
                             echo '<option>' . $section . '</option>';
@@ -130,11 +132,15 @@
                     ?>
                 </select>
                 <div class="form-control-feedback invalid-feedback" id="id_error_block_polyteamgenerator_sections">
+                ERROR
                 </div>
             </div>
         </div>
 
         <button class="btn btn-primary" onclick="send()"><i id="id_icon_block_polyteamgenerator_loading_generate" style="display:none" class="fa fa-circle-o-notch fa-spin"></i> <?php echo get_string("generate", "block_polyteamgenerator"); ?> </button>
+        <div class="form-control-feedback invalid-feedback" id="id_error_block_polyteamgenerator_general">
+            ERROR
+        </div>
     </form>
 </div>
 
@@ -143,6 +149,9 @@
 <script>
     let url = "<?=$url?>";
     let groupings = <?=$groupings?>;
+    let gcodes = <?=$codes?>;
+    
+    let activatedErrorFields = [];
 
     function parseForm() {
         const min = parseInt(document.getElementById("id_block_polyteamgenerator_team_size_min").value);
@@ -154,7 +163,7 @@
         const algorithms = document.getElementById("id_block_polyteamgenerator_algorithms");
         const algorithm = algorithms.options[algorithms.selectedIndex].value;
         const sections = getSelectValues(document.getElementById("id_block_polyteamgenerator_sections"));
-
+        
         console.log({
             teamSize: {min, max},
             teamSizePreference,
@@ -164,7 +173,7 @@
             algorithm,
             groupings
         });
-        
+
         return {
             teamSize: {min, max},
             teamSizePreference,
@@ -182,12 +191,14 @@
         let xhr = new XMLHttpRequest();
         xhr.onload = () => {
             loading.style.display = "none";
+            reset_errors();
+
             if (xhr.status >= 200 && xhr.status < 300) {
                 const response = JSON.parse(xhr.responseText);
-                console.log(response);
                 download(response);
             } else {
-                console.log(response);
+                const response = JSON.parse(xhr.responseText);
+                displayError(response.code, response.input, response.suffixes);
             }
         };
 
@@ -232,6 +243,53 @@
             }
         }
         return result;
+    }
+
+    function displayError(errorCode, inputName, suffixes = [""]) {
+        suffixes.forEach(s => {
+            let inputId, errorInputId;
+
+            if (inputName) {
+                inputId = "id_block_polyteamgenerator_" + inputName + (s ? "_" + s : s);
+                errorInputId = "id_error_block_polyteamgenerator_" + inputName;
+            } else {
+                inputId = null;
+                errorInputId = "id_error_block_polyteamgenerator_general";
+            }
+            
+            let input;
+            if (inputId) {
+                input = document.getElementById(inputId);
+            }
+        
+            const errorInput = document.getElementById(errorInputId);
+
+            if (input) {
+                input.classList.add("is-invalid");
+            }
+
+            if (errorInput) {
+                errorInput.style.display = "block";
+                errorInput.innerHTML = "- " + gcodes[errorCode];
+            }
+
+            activatedErrorFields.push({inputId, errorInputId});
+        });
+    }
+
+    function reset_errors() {
+        activatedErrorFields.forEach(({inputId, errorInputId}) => {
+            if (inputId) {
+                const input = document.getElementById(inputId);
+                input.classList.remove("is-invalid");
+            }
+
+            if (errorInputId) {
+                const errorInput = document.getElementById(errorInputId);
+                errorInput.style.display = "none";
+                errorInput.innerHTML = "";
+            }
+        });
     }
 
 </script>

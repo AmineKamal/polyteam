@@ -45,6 +45,8 @@
 </div>
 
 <script>
+    let qcodes = <?=$codes?>;
+
     function parseQuestions() {
         const sections = <?=$jsQuestions?>;
 
@@ -80,6 +82,9 @@
                 const response = xhr.responseText;
                 console.log(response);
                 alert(response);
+            } else {
+                const response = JSON.parse(xhr.responseText);
+                console.log(response);
             }
         };
 
