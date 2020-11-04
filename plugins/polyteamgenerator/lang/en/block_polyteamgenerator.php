@@ -2,8 +2,6 @@
 
 $string['pluginname'] = 'Polyteam Generator';
 $string['polyteamgenerator'] = 'Polyteam';
-$string['polyteamgenerator:addinstance'] = 'Add a new simple HTML block';
-$string['polyteamgenerator:myaddinstance'] = 'Add a new simple HTML block to the My Moodle page';
 
 /**
  * TEMPLATES
@@ -105,3 +103,4 @@ $string['Merciful'] = 'Merciful';
 
 $string['error:code:invalid-team-size-range'] = "The provided range for the team size is not valid for the number of students.";
 $string['error:code:invalid-prefix'] = "The provided prefix is already in use by other team names and there might be conflicts.";
+$string['error:code:general'] = "We seem to have some issues, please retry later.";

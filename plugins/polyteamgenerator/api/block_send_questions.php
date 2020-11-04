@@ -9,7 +9,7 @@ global $USER;
 
 $url = "https://polyteam-backend-staging.herokuapp.com/personality"; // Default
 if (isset($CFG->block_polyteamgenerator_url)) {
-    $url = $CFG->block_polyteamgenerator_url;
+    $url = $CFG->block_polyteamgenerator_url . "personality";
 }
 
 $ch = curl_init($url);

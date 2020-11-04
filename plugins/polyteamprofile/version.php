@@ -22,8 +22,8 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = 2020060900;        // The current plugin version (Date: YYYYMMDDXX).
+$plugin->version   = 2020110413;        // The current plugin version (Date: YYYYMMDDXX).
 $plugin->requires  = 2012062500;        // Requires this Moodle version.
-$plugin->maturity = MATURITY_STABLE;
-$plugin->release  = 'Version for Moodle 2.2 onwards';
+$plugin->maturity = MATURITY_BETA;
+$plugin->release  = 'Version 1.0';
 $plugin->component = 'profilefield_polyteamprofile';        // Full name of the plugin (used for diagnostics).

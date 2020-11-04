@@ -24,3 +24,7 @@
  */
 
 $string['pluginname'] = 'Polyteam Profile';
+$string['personality'] = 'Personalité';
+
+$string["personality:help:label"] = "Aide avec la Personalité";
+$string["personality:help:content"] = "Le champ personalité de votre profil représente votre personalité";
