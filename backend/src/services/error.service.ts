@@ -1,6 +1,6 @@
 import { IResponse } from "./types";
 
-type ErrorCode = "invalid-team-size-range" | "invalid-prefix";
+type ErrorCode = "invalid-team-size-range" | "invalid-prefix" | "general";
 type ErrorInput = "team_size" | "team_size_preference" | "prefix";
 type ErrorInputSuffix = "" | "min" | "max";
 type ErrorSeverity = "ERROR" | "WARNING";

@@ -8,12 +8,12 @@
     }
 
     .is-warning {
-        border-color: #FFCC00 !important;
-        background-image: url("data:image/svg+xml,%3csvg xmlns=\'http://www.w3.org/2000/svg\' fill=\'%23FFCC00\' viewBox=\'-2 -2 7 7\'%3e%3cpath stroke=\'%23FFCC00\' d=\'M0 0l3 3m0-3L0 3\'/%3e%3ccircle r=\'.5\'/%3e%3ccircle cx=\'3\' r=\'.5\'/%3e%3ccircle cy=\'3\' r=\'.5\'/%3e%3ccircle cx=\'3\' cy=\'3\' r=\'.5\'/%3e%3c/svg%3E") !important;
+        border-color: #FD6A02 !important;
+        background-image: url("data:image/svg+xml,%3csvg xmlns=\'http://www.w3.org/2000/svg\' fill=\'%23FD6A02\' viewBox=\'-2 -2 7 7\'%3e%3cpath stroke=\'%23FD6A02\' d=\'M0 0l3 3m0-3L0 3\'/%3e%3ccircle r=\'.5\'/%3e%3ccircle cx=\'3\' r=\'.5\'/%3e%3ccircle cy=\'3\' r=\'.5\'/%3e%3ccircle cx=\'3\' cy=\'3\' r=\'.5\'/%3e%3c/svg%3E") !important;
     }
 
     .warning-feedback {
-        color: #FFCC00 !important;
+        color: #FD6A02 !important;
     }
 
 </style>
@@ -174,17 +174,6 @@
         const algorithms = document.getElementById("id_block_polyteamgenerator_algorithms");
         const algorithm = algorithms.options[algorithms.selectedIndex].value;
         const sections = getSelectValues(document.getElementById("id_block_polyteamgenerator_sections"));
-        
-        console.log({
-            teamSize: {min, max},
-            teamSizePreference,
-            sections,
-            groupingName,
-            prefix,
-            algorithm,
-            groupings,
-            groupnames
-        });
 
         return {
             teamSize: {min, max},
@@ -216,6 +205,11 @@
                 if (response.severity === "WARNING") {
                     download(response.data.csv, "csv", "groups.csv");
                     download(JSON.stringify(response.data.teams, null, 4), "json", "groups.json");
+                }
+
+                if (!response.code) {
+                    displayError("general", "ERROR");
+                    return;
                 }
 
                 displayError(response.code, response.severity, response.input, response.suffixes);

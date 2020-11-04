@@ -116,36 +116,37 @@ export class TeamService {
       teamSizePreference,
     } = params;
 
-    const members = flatten(
-      groupings
-        .filter(
-          ({ grouping }) =>
-            sections.includes(grouping.name) || sections.includes("All")
-        )
-        .map(g => g.members)
-    );
+    let groups = groupings.filter(({ grouping }) => sections.includes(grouping.name) || sections.includes("All")).map(g => g.members);
 
-    switch (algorithm) {
-      case "MBTI":
-        const personalityStudents = members.map(m => ({
-          ...m,
-          personality: PersonalityService.parsePersonality(
-            m.profile_field_polyteam
-          ),
-        }));
+    const combine = false;
 
-        return this.createAffinityGroupsTeams(
-          personalityStudents,
-          teamSize,
-          teamSizePreference
-        );
-
-      case "RANDOM":
-        return this.createRandomTeams(members, teamSize, teamSizePreference);
-
-      default:
-        return;
+    if (combine) {
+      groups = [flatten(groups)];
     }
+
+    return flatten(groups.map((members) => {
+      switch (algorithm) {
+        case "MBTI":
+          const personalityStudents = members.map(m => ({
+            ...m,
+            personality: PersonalityService.parsePersonality(
+              m.profile_field_polyteam
+            ),
+          }));
+
+          return this.createAffinityGroupsTeams(
+            personalityStudents,
+            teamSize,
+            teamSizePreference
+          );
+
+        case "RANDOM":
+          return this.createRandomTeams(members, teamSize, teamSizePreference);
+
+        default:
+          return;
+      }
+    }));
   }
 
   private static createRandomTeams(
@@ -262,7 +263,10 @@ export class TeamService {
     preference: TeamSizePreference
   ) {
     if (size.min === NaN || size.max === NaN) return null;
+    if (size.min <= 0 || size.max <= 0) return null;
+    if (size.max < size.min) return null;
     if (len < size.min) return null;
+
     if (preference === "min") return this.getMinTeams(len, size);
     else return this.getMaxTeams(len, size);
   }

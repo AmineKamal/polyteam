@@ -11,6 +11,10 @@ class block_polyteamgenerator extends block_base {
         $this->title = get_string('polyteamgenerator', 'block_polyteamgenerator');
     }
 
+    public function has_config() {
+        return true;
+    }
+
     public function get_content() {
         global $COURSE, $USER, $CFG;
         
@@ -89,7 +93,7 @@ class block_polyteamgenerator extends block_base {
 
         $url = "https://polyteam-backend-staging.herokuapp.com/teams"; // Default
         if (isset($CFG->block_polyteamgenerator_url)) {
-            $url = $CFG->block_polyteamgenerator_url;
+            $url = $CFG->block_polyteamgenerator_url . "teams";
         }
 
         // Extra Scope Variables accessible in template
