@@ -29,11 +29,11 @@
 
 **Integrated personality questionnaire block**
 
-[![INSERT YOUR GRAPHIC HERE](personality_demo.png)]()
+[![INSERT YOUR GRAPHIC HERE](personality_demo.PNG)]()
 
 **Team generator block**
 
-[![INSERT YOUR GRAPHIC HERE](generator_demo.png)]()
+[![INSERT YOUR GRAPHIC HERE](generator_demo.PNG)]()
 
 ---
 
