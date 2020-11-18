@@ -23,9 +23,9 @@
 
 ## Features
 
-**Personality Type In Moodle Profile**
+**Personality type In moodle profile**
 
-[![INSERT YOUR GRAPHIC HERE](http://i.imgur.com/dt8AUb6.png)]()
+[![INSERT YOUR GRAPHIC HERE](profile_demo.png)]()
 
 ---
 
