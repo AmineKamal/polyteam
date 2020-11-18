@@ -1,10 +1,8 @@
 # POLYTEAM
 
-> Moodle plugin for generating teams using personality and affinitty groups
+> Moodle plugin for generating teams using personality and affinity groups
 
-## Table of Contents (Optional)
-
-> If your `README` has a lot of info, section headers might be nice.
+## Table of Contents
 
 - [Installation](#installation)
 - [Features](#features)
@@ -15,38 +13,17 @@
 
 ## Installation
 
-- All the `code` required to get started
-- Images of what it should look like
-
-### Clone
-
-- Clone this repo to your local machine using `https://github.com/fvcproductions/SOMEREPO`
-
-### Setup
-
-- If you want more syntax highlighting, format your code like this:
-
-> update and install this package first
-
-```shell
-$ brew update
-$ brew install fvcproductions
-```
-
-> now install npm and bower packages
-
-```shell
-$ npm install
-$ bower install
-```
-
-- For all the possible languages that support syntax highlithing on GitHub (which is basically all of them), refer <a href="https://github.com/github/linguist/blob/master/lib/linguist/languages.yml" target="_blank">here</a>.
+- Find the plugins in the moodle plugin directory
+  - [Profile]()
+  - [Generator]()
+- Install the plugins, You can see this [tutorial]() for the installation process
+- Server installation process coming soon...
 
 ---
 
 ## Features
 
-**_INSERT ANOTHER GRAPHIC HERE_**
+**Personality Type In Moodle Profile**
 
 [![INSERT YOUR GRAPHIC HERE](http://i.imgur.com/dt8AUb6.png)]()
 
