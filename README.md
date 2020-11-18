@@ -23,9 +23,17 @@
 
 ## Features
 
-**Personality type In moodle profile**
+**Personality type in moodle profile**
 
 [![INSERT YOUR GRAPHIC HERE](profile_demo.png)]()
+
+**Integrated personality questionnaire block**
+
+[![INSERT YOUR GRAPHIC HERE](personality_demo.png)]()
+
+**Team generator block**
+
+[![INSERT YOUR GRAPHIC HERE](generator_demo.png)]()
 
 ---
 
