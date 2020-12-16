@@ -7,7 +7,9 @@ COPY package.json /usr/src/app/
 RUN npm install
 
 COPY . /usr/src/app
-RUN npm run build
+RUN ls -a
+RUN (npm run build || true) > out.txt
+RUN cat out.txt
 
 EXPOSE 3000
 
