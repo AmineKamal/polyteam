@@ -82,7 +82,7 @@ export class TeamService {
     const validatePrefix = this.validatePrefix(params);
     const teams = this.createTeams(params);
 
-    if (!teams)
+    if (!teams || !Array.isArray(teams) || !teams.every(Boolean))
       return errorResponse("invalid-team-size-range", "ERROR", "team_size", null, [
         "max",
         "min",
