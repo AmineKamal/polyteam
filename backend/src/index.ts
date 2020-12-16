@@ -2,6 +2,8 @@ import * as http from "http";
 import config from "./config/config";
 import { Socket } from "./socket/index";
 
+console.log("DEBUG");
+
 // tslint:disable-next-line: no-require-imports
 require("dotenv").config();
 
